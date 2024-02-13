@@ -1,11 +1,55 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import EditModal from '../EditModal/EditModal';
 
-function Account() {
+const Account = () => {
+
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
+
+  const profileFetch = async () => {
+    const token = localStorage.getItem('token'); // Récupère le token du localStorage
+
+    try {
+      const response = await fetch('http://localhost:3001/api/v1/user/profile', {
+        method: 'POST', 
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`Erreur HTTP: ${response.status}`); // Lance une erreur si la réponse n'est pas ok
+      }
+
+      const data = await response.json();
+      console.log(data)
+
+      // Traitez ou utilisez les données reçues, par exemple :
+      setFirstName(data.body.firstName); 
+      setLastName(data.body.lastName);
+
+    } catch (error) {
+      console.error('Erreur lors de la récupération du profil:', error);
+    }
+  };
+
+  useEffect(() => {
+    profileFetch();
+  }, []); 
+
+  const EditButtonClick = () => {
+    setIsEditModalOpen(true);
+  };
+
   return (
     <main className="main bg-dark">
       <div className="header">
-        <h1>Welcome back<br />Tony Jarvis!</h1>
-        <button className="edit-button">Edit Name</button>
+        <h1>Welcome back<br />{firstName} {lastName}</h1>
+        <button className="edit-button" onClick={EditButtonClick}>Edit Name</button>
+        <EditModal isOpen={isEditModalOpen} onClose={() => setIsEditModalOpen(false)} />
       </div>
       <h2 className="sr-only">Accounts</h2>
       <section className="account">

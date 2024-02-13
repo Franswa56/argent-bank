@@ -2,8 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { login, logout } from '../../redux/Actions/AuthActions';
+import Modal from '../Modal/Modal';
 
 function SignForm() {
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
 // Redux part
   const loggedIn = useSelector((state) => state.auth.loggedIn);
@@ -18,6 +21,8 @@ function SignForm() {
     const token = localStorage.getItem('token');
     if (token) {
       dispatch(login());
+    } else {
+
     }
   }, []);
 
@@ -41,9 +46,13 @@ function SignForm() {
       if (data.body && data.body.token) { 
         localStorage.setItem('token', data.body.token); 
         dispatch(login()); 
+      } else {
+        // Si la réponse ne contient pas de token
+        setIsModalOpen(true);
       }
     } catch (error) {
       console.error('Erreur lors de la connexion:', error);
+      setIsModalOpen(true);
     }
   };
 
@@ -65,6 +74,13 @@ function SignForm() {
             <label htmlFor="password">Password</label>
             <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
           </div>
+          {isModalOpen && (
+      <Modal
+        onClose={() => setIsModalOpen(false)}
+        text='Connexion échouée. Veuillez réessayer.'
+      >
+      </Modal>
+    )}
           <div className="input-remember">
             <input type="checkbox" id="remember-me" />
             <label htmlFor="remember-me">Remember me</label>
