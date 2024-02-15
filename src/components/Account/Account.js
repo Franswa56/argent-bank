@@ -5,6 +5,7 @@ const Account = () => {
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const [userName, setUserName] = useState('');
 
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
@@ -27,9 +28,10 @@ const Account = () => {
       const data = await response.json();
       console.log(data)
 
-      // Traitez ou utilisez les données reçues, par exemple :
+      
       setFirstName(data.body.firstName); 
       setLastName(data.body.lastName);
+      setUserName(data.body.userName)
 
     } catch (error) {
       console.error('Erreur lors de la récupération du profil:', error);
@@ -47,7 +49,7 @@ const Account = () => {
   return (
     <main className="main bg-dark">
       <div className="header">
-        <h1>Welcome back<br />{firstName} {lastName}</h1>
+        <h1>Welcome back<br />{firstName} {lastName} ( {userName} )</h1>
         <button className="edit-button" onClick={EditButtonClick}>Edit Name</button>
         <EditModal isOpen={isEditModalOpen} onClose={() => setIsEditModalOpen(false)} />
       </div>
