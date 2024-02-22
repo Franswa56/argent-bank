@@ -1,7 +1,7 @@
-import '../Modal/Modal.css'
+import './Modal.css'
 import { useState} from 'react';
 
-function EditModal({ isOpen, onClose }) {
+function EditModal({ isOpen, onClose, onUserNameUpdate }) {
 
     const [newUsername, setNewUsername] = useState('');
 
@@ -31,7 +31,8 @@ function EditModal({ isOpen, onClose }) {
           }
       
           const data = await response.json();
-          console.log(data)      
+          console.log(data)  
+          onUserNameUpdate();    
           onClose(); // Ferme la modale après la mise à jour réussie
         } catch (error) {
           console.error('Erreur lors de la mise à jour du nom d\'utilisateur:', error);

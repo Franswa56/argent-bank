@@ -77,7 +77,7 @@ function SignForm() {
           {isModalOpen && (
       <Modal
         onClose={() => setIsModalOpen(false)}
-        text='Connexion échouée. Veuillez réessayer.'
+        text="Nom d'utilisateur ou mot de passe incorrect."
       >
       </Modal>
     )}

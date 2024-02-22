@@ -46,12 +46,16 @@ const Account = () => {
     setIsEditModalOpen(true);
   };
 
+  const handleUserNameUpdate = () => {
+    profileFetch();
+  };
+
   return (
     <main className="main bg-dark">
       <div className="header">
         <h1>Welcome back<br />{firstName} {lastName} ( {userName} )</h1>
         <button className="edit-button" onClick={EditButtonClick}>Edit Name</button>
-        <EditModal isOpen={isEditModalOpen} onClose={() => setIsEditModalOpen(false)} />
+        <EditModal isOpen={isEditModalOpen} onClose={() => setIsEditModalOpen(false)} onUserNameUpdate={handleUserNameUpdate} />
       </div>
       <h2 className="sr-only">Accounts</h2>
       <section className="account">

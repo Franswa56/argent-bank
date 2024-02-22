@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux'
 import { logout } from '../../redux/Actions//AuthActions'
 import { useNavigate } from "react-router-dom";
+import "./Header.css"
 
 function Header() {
 
@@ -12,13 +13,12 @@ function Header() {
   const isLoggedIn = useSelector((state) => state.auth.loggedIn);
 
   const handleLogout = (e) => {
-    e.preventDefault(); 
 
     dispatch(logout())  
     localStorage.removeItem('token')
 
     navigate('/'); 
-  };
+};
 
 
 
@@ -29,12 +29,21 @@ function Header() {
         <img className="main-nav-logo-image" src={logo} alt="Argent Bank Logo" />
         <h1 className="sr-only">Argent Bank</h1>
       </Link>
-      <div> 
-      {isLoggedIn ? (         
-          <a href="/" className="main-nav-item" onClick={handleLogout}>
-          <i className="fa fa-user-circle"></i>
-          Sign Out
-        </a>
+      <div>
+        {isLoggedIn ? (
+          <>
+            <button className="main-nav-item" onClick={(e) => {
+              e.preventDefault(); 
+              handleLogout();
+            }}>
+              <i className="fa fa-user-circle"></i>
+              Sign Out
+            </button>
+            <Link className="main-nav-item" to="/user">
+              <i className="fa fa-user-circle"></i>
+              Account
+            </Link>
+          </>
         ) : (
           <Link className="main-nav-item" to="/sign-in">
             <i className="fa fa-user-circle"></i>
@@ -44,6 +53,5 @@ function Header() {
       </div>
     </nav>
   );
-}
-
-export default Header;
+        }
+export default Header
