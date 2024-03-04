@@ -1,7 +1,7 @@
 import React from 'react';
-import chatIcon from '../../style/img/icon-chat.png'; // Assurez-vous d'avoir le chemin correct vers vos images
-import moneyIcon from '../../style/img/icon-money.png';
-import securityIcon from '../../style/img/icon-security.png';
+import chatIcon from '../../style/img/icon-chat.webp'; 
+import moneyIcon from '../../style/img/icon-money.webp';
+import securityIcon from '../../style/img/icon-security.webp';
 
 function Features() {
   return (

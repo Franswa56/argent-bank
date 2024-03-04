@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { login, logout } from '../../redux/Actions/AuthActions';
+import { login } from '../../redux/Actions/AuthActions';
 import Modal from '../Modal/Modal';
 
 function SignForm() {
@@ -27,7 +27,7 @@ function SignForm() {
   }, []);
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Empêche l'envoi du formulaire
+    e.preventDefault(); 
 
     try {
       const response = await fetch('http://localhost:3001/api/v1/user/login', {
@@ -47,7 +47,6 @@ function SignForm() {
         localStorage.setItem('token', data.body.token); 
         dispatch(login()); 
       } else {
-        // Si la réponse ne contient pas de token
         setIsModalOpen(true);
       }
     } catch (error) {
