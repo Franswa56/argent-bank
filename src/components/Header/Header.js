@@ -35,7 +35,6 @@ function Header() {
       <div className="header-nav">
         {isLoggedIn ? (
           <>
-          <p className="username">{userName}</p>
             <button className="main-nav-item" onClick={(e) => {
               e.preventDefault(); 
               handleLogout();
@@ -45,7 +44,7 @@ function Header() {
             </button>
             <Link className="main-nav-item" to="/user">
               <i className="fa fa-user-circle"></i>
-              Account
+              {userName}
             </Link>
           </>
         ) : (
