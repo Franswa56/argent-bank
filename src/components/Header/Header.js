@@ -11,6 +11,9 @@ function Header() {
   const navigate = useNavigate();
 
   const isLoggedIn = useSelector((state) => state.auth.loggedIn);
+  const userName = useSelector((state) => state.user.userName);
+
+  console.log(userName)
 
   const handleLogout = (e) => {
 
@@ -29,9 +32,10 @@ function Header() {
         <img className="main-nav-logo-image" src={logo} alt="Argent Bank Logo" />
         <h1 className="sr-only">Argent Bank</h1>
       </Link>
-      <div>
+      <div className="header-nav">
         {isLoggedIn ? (
           <>
+          <p className="username">{userName}</p>
             <button className="main-nav-item" onClick={(e) => {
               e.preventDefault(); 
               handleLogout();

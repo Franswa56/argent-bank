@@ -9,6 +9,12 @@ function EditModal({ isOpen, onClose, onUserNameUpdate }) {
   const handleSubmit = async (e) => {
     e.preventDefault(); // Empêche le rechargement de la page
 
+
+    if (!newUsername.trim()) {
+      alert("Le nom d'utilisateur est requis") // Met à jour le message d'erreur
+      return; // Arrête l'exécution de la fonction si newUsername est vide
+    }
+
     const token = localStorage.getItem("token"); // Récupère le token du localStorage
 
     try {
@@ -40,7 +46,7 @@ function EditModal({ isOpen, onClose, onUserNameUpdate }) {
       <div className="modal-content">
         <h2>Change User Name</h2>
         <form onSubmit={handleSubmit}>
-          <input type="text" placeholder="New User Name" value={newUsername} onChange={(e) => setNewUsername(e.target.value)} maxLength="16" required />
+          <input type="text" placeholder="New User Name" value={newUsername} onChange={(e) => setNewUsername(e.target.value)} maxLength="16" />
           <button type="submit" className="modal-button">
             Update
           </button>

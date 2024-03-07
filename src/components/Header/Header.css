@@ -10,3 +10,21 @@
     border: none;
     background-color: white;
 }
+
+.header-nav {
+    display: flex;
+    align-items: center;
+}
+
+.username {
+    color: #2c3e50;
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: none;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+    border: none;
+    background-color: white;
+    padding-right: 10px;
+}
